@@ -8,5 +8,8 @@ namespace RendimensionImagenes
 {
     interface IBridge
     {
+        bool Inicio(string pUser, string pPassword);
+        bool Peticion(string pOrigen, string pDestino, int pOpcion, int pResolucion);
+        bool Peticion(List<string> pOrigen, string pDestino, int pOpcion, int pResolucion);
     }
 }

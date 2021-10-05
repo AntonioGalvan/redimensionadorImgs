@@ -1,4 +1,6 @@
-﻿namespace RendimensionImagenes
+﻿using System.Collections.Generic;
+
+namespace RendimensionImagenes
 {
     //Interfaz de patrón proxy
     /// Autor: Antonio Galván Uriza

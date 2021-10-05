@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace RendimensionImagenes
@@ -10,6 +11,7 @@ namespace RendimensionImagenes
     /// Modificación: 07-09-21
     public partial class Resizer : Form
     {
+        private List<string> archivos = new List<string>();
         private string origen = "";
         private string destino = "";
         private int resolucion = 0;
@@ -55,8 +57,17 @@ namespace RendimensionImagenes
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                origen = openFileDialog1.FileName;
-                txtOrigen.Text = origen;
+                archivos.Add(openFileDialog1.FileName);
+                if(archivos.Count <= 1)
+                {
+                    origen = archivos[0];
+                    txtOrigen.Text = origen;
+                }
+                else
+                {
+                    txtOrigen.Text = $"Archivos [{archivos.Count}]";
+                }
+                
             }
         }
 
@@ -69,11 +80,13 @@ namespace RendimensionImagenes
         /// <param name="e"> Informacíón del evento</param>
         private void pbxDestino_Click(object sender, EventArgs e)
         {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                destino = saveFileDialog1.FileName;
+                destino = folderBrowserDialog1.SelectedPath;
                 txtDestino.Text = destino;
             }
+
+
         }
 
         //Método para comprimir imagen
@@ -135,22 +148,44 @@ namespace RendimensionImagenes
                         }
                     }
 
-                    //Hacemos la petición de un servicio de la app
-                    if (frmLogin.bridge.comprimir(origen, destino, opcion, resolucion))
+                    if(archivos.Count > 1)
                     {
-                        btnComprimir.Visible = false;
-                        btnNuevaImagen.Visible = true;
-                        lblExito.Visible = true;
-                        txtOrigen.Text = "";
-                        txtDestino.Text = "";
-                        origen = "";
-                        destino = "";
-                        resolucion = 0;
+                        if (frmLogin.bridge.comprimir(archivos, destino, opcion, resolucion))
+                        {
+                            btnComprimir.Visible = false;
+                            btnNuevaImagen.Visible = true;
+                            lblExito.Visible = true;
+                            txtOrigen.Text = "";
+                            txtDestino.Text = "";
+                            origen = "";
+                            destino = "";
+                            resolucion = 0;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ha ocurrido un error, es posible que dbes utilizar la versión 2.0");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Ha ocurrido un error");
+                        if (frmLogin.bridge.comprimir(origen, destino, opcion, resolucion))
+                        {
+                            btnComprimir.Visible = false;
+                            btnNuevaImagen.Visible = true;
+                            lblExito.Visible = true;
+                            txtOrigen.Text = "";
+                            txtDestino.Text = "";
+                            origen = "";
+                            destino = "";
+                            resolucion = 0;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ha ocurrido un error");
+                        }
                     }
+                    //Hacemos la petición de un servicio de la app
+                    
 
                 }
                 else
@@ -201,6 +236,29 @@ namespace RendimensionImagenes
             btnNuevaImagen.Visible = false;
             lblExito.Visible = false;
             btnComprimir.Visible = true;
+        }
+
+        private void txtOrigen_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void txtOrigen_DragDrop(object sender, DragEventArgs e)
+        {
+            List<string> archivos = new List<string>();
+            archivos = (List<string>)e.Data.GetData(DataFormats.FileDrop, false);
+            txtOrigen.Text = "Archivos varios";
+        }
+
+        private void Resizer_Load(object sender, EventArgs e)
+        {
+            txtOrigen.AllowDrop = true;
+            
+        }
+
+        private void txtOrigen_MouseDown(object sender, MouseEventArgs e)
+        {
+            DoDragDrop(this.txtOrigen.ToString(), DragDropEffects.Copy);
         }
     }
 }

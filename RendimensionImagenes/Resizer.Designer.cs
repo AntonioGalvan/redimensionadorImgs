@@ -57,6 +57,7 @@ namespace RendimensionImagenes
             this.cbxCalidad = new System.Windows.Forms.ComboBox();
             this.lblExito = new System.Windows.Forms.Label();
             this.btnNuevaImagen = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxDecoracion)).BeginInit();
@@ -157,6 +158,9 @@ namespace RendimensionImagenes
             this.txtOrigen.Name = "txtOrigen";
             this.txtOrigen.Size = new System.Drawing.Size(460, 32);
             this.txtOrigen.TabIndex = 0;
+            this.txtOrigen.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtOrigen_DragDrop);
+            this.txtOrigen.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtOrigen_DragEnter);
+            this.txtOrigen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtOrigen_MouseDown);
             // 
             // pnlDestinoPath
             // 
@@ -409,6 +413,7 @@ namespace RendimensionImagenes
             this.Name = "Resizer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Resizer";
+            this.Load += new System.EventHandler(this.Resizer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxDecoracion)).EndInit();
@@ -458,5 +463,6 @@ namespace RendimensionImagenes
         private System.Windows.Forms.ComboBox cbxCalidad;
         private System.Windows.Forms.Label lblExito;
         private System.Windows.Forms.Button btnNuevaImagen;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }

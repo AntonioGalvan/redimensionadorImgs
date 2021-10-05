@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using ImageMagick;
@@ -18,7 +19,10 @@ namespace RendimensionImagenes
         /// Fecha: 05-09-21
         /// Versión: 1.0.2.1
         /// Modificación: 07-09-21
-        public class CInicio : ISujeto
+        /// 
+
+        private static int numImg = 0;
+        public class CInicio : ISujeto, IBridge
         {
             private IComprimir resizer;
             private static bool isAuthenticated = false;
@@ -81,9 +85,14 @@ namespace RendimensionImagenes
                 }
                 
             }
+
+            public bool Peticion(List<string> pOrigen, string pDestino, int pOpcion, int pResolucion)
+            {
+                return false;
+            }
         }
 
-        public class CInicio2 : ISujeto
+        public class CInicio2 : ISujeto, IBridge
         {
             private IComprimir resizer;
             private static bool isAuthenticated = false;
@@ -147,6 +156,37 @@ namespace RendimensionImagenes
 
             }
 
+            public bool Peticion(List<string> pOrigen, string pDestino, int pOpcion, int pResolucion)
+            {
+                //Verifica si el usuario está autenticado
+                if (IsAuthenticated == true)
+                {
+                    if (pOpcion == 1)
+                        resizer = new CClasico();
+                    if (pOpcion == 2)
+                        resizer = new CMagick();
+
+                    //Trata de realizar la compresión
+                    try
+                    {
+                        foreach(string img in pOrigen)
+                        {
+                            resizer.comprimir(img, pDestino, pResolucion);
+                        }  
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+
         }
 
         //Clase de compresor CMagick (Privada)
@@ -167,14 +207,15 @@ namespace RendimensionImagenes
             public void comprimir(string pOrigen, string pDestino, int pResolucion)
             {
                 pOrigen = @""+pOrigen;
-                pDestino = @""+pDestino;
-                    
-                using(MagickImage oMagickImage = new MagickImage(pOrigen))
+                pDestino = @"" + pDestino + "/img-min" + numImg + ".jpg";
+
+                using (MagickImage oMagickImage = new MagickImage(pOrigen))
                 {
                     oMagickImage.Resize(pResolucion, 0);
 
                     oMagickImage.Write(pDestino);
                 }
+                numImg++;
             }
         }
 
@@ -196,7 +237,7 @@ namespace RendimensionImagenes
             public void comprimir(string pOrigen, string pDestino, int pResolucion)
             {
                 pOrigen = @"" + pOrigen;
-                pDestino = @"" + pDestino;
+                pDestino = @"" + pDestino + "/img-min" + numImg + ".jpg";
 
                 using (Bitmap mybitmab = new Bitmap(pOrigen))
                 {
@@ -209,6 +250,7 @@ namespace RendimensionImagenes
                     myEncoderParameters.Param[0] = myEncoderParameter;
                     mybitmab.Save(pDestino, myImageCodecInfo, myEncoderParameters);
                 }
+                numImg++;
             }
 
             //Método para comprimir con CMagick (framework)
