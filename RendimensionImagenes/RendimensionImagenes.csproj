@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CAbstraccion.cs" />
     <Compile Include="CProxy.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -66,6 +67,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="IBridge.cs" />
     <Compile Include="IComprimir.cs" />
     <Compile Include="ISujeto.cs" />
     <Compile Include="Program.cs" />

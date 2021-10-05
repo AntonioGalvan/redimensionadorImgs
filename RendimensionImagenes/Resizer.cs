@@ -136,8 +136,7 @@ namespace RendimensionImagenes
                     }
 
                     //Hacemos la petición de un servicio de la app
-                    ISujeto ejecucion = new CProxy.CInicio();
-                    if (ejecucion.Peticion(origen, destino, opcion, resolucion))
+                    if (frmLogin.bridge.comprimir(origen, destino, opcion, resolucion))
                     {
                         btnComprimir.Visible = false;
                         btnNuevaImagen.Visible = true;

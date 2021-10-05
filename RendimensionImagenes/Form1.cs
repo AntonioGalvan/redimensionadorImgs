@@ -10,6 +10,7 @@ namespace RendimensionImagenes
     /// Modificación: 07-09-21
     public partial class frmLogin : Form
     {
+        public static CAbstraccion bridge;
         public frmLogin()
         {
             InitializeComponent();
@@ -25,8 +26,11 @@ namespace RendimensionImagenes
         private void btnInicio_Click(object sender, EventArgs e)
         {
             //Validamos credenciales dentro del proxy que nos dará acceso a funciones más adelante
-            ISujeto sesion = new CProxy.CInicio();
-            if(sesion.Inicio(txtUsuario.Text, txtContrasena.Text)){
+            if (cbxVersion.SelectedIndex == 0)
+                bridge = new CAbstraccion(1);
+            else
+                bridge = new CAbstraccion(2);
+            if (bridge.iniciarSesion(txtUsuario.Text, txtContrasena.Text)){
                 new Resizer().Show();
                 this.Hide();
             }
@@ -46,6 +50,11 @@ namespace RendimensionImagenes
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            cbxVersion.SelectedIndex = 0;
         }
     }
 }

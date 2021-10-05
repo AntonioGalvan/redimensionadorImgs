@@ -147,6 +147,7 @@ namespace RendimensionImagenes
             // 
             // txtOrigen
             // 
+            this.txtOrigen.AllowDrop = true;
             this.txtOrigen.BackColor = System.Drawing.SystemColors.ControlLight;
             this.txtOrigen.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtOrigen.Enabled = false;
@@ -358,7 +359,7 @@ namespace RendimensionImagenes
             this.lblExito.ForeColor = System.Drawing.Color.DarkSeaGreen;
             this.lblExito.Location = new System.Drawing.Point(95, 428);
             this.lblExito.Name = "lblExito";
-            this.lblExito.Size = new System.Drawing.Size(376, 31);
+            this.lblExito.Size = new System.Drawing.Size(390, 33);
             this.lblExito.TabIndex = 23;
             this.lblExito.Text = "Se ha comprimido con éxito";
             this.lblExito.Visible = false;

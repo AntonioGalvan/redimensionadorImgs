@@ -42,7 +42,7 @@ namespace RendimensionImagenes
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.txtContrasena = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cbxVersion = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxUserImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPasswordImg)).BeginInit();
@@ -182,14 +182,21 @@ namespace RendimensionImagenes
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
             // 
-            // button1
+            // cbxVersion
             // 
-            this.button1.Location = new System.Drawing.Point(322, 315);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(750, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.cbxVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbxVersion.Font = new System.Drawing.Font("Roboto", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbxVersion.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.cbxVersion.FormattingEnabled = true;
+            this.cbxVersion.ItemHeight = 20;
+            this.cbxVersion.Items.AddRange(new object[] {
+            "V 1.0",
+            "V 2.0"});
+            this.cbxVersion.Location = new System.Drawing.Point(352, 588);
+            this.cbxVersion.Name = "cbxVersion";
+            this.cbxVersion.Size = new System.Drawing.Size(72, 28);
+            this.cbxVersion.TabIndex = 23;
             // 
             // frmLogin
             // 
@@ -197,7 +204,7 @@ namespace RendimensionImagenes
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(436, 629);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cbxVersion);
             this.Controls.Add(this.txtContrasena);
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.btnSalir);
@@ -215,6 +222,7 @@ namespace RendimensionImagenes
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.frmLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxUserImg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPasswordImg)).EndInit();
@@ -238,7 +246,7 @@ namespace RendimensionImagenes
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.TextBox txtContrasena;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cbxVersion;
     }
 }
 
