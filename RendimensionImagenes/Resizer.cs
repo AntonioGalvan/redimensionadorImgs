@@ -163,7 +163,7 @@ namespace RendimensionImagenes
                         }
                         else
                         {
-                            MessageBox.Show("Ha ocurrido un error, es posible que dbes utilizar la versión 2.0");
+                            MessageBox.Show("Ha ocurrido un error, es posible que debas utilizar la versión 2.0");
                         }
                     }
                     else
