@@ -9,19 +9,17 @@ namespace RendimensionImagenes
     //Clase Proxy
     /// Autor: Antonio Galván Uriza
     /// Fecha: 05-09-21
-    /// Versión: 1.0.2.1
+    /// Versión: 2.0.0.1
     /// Modificación: 07-09-21
     class CProxy
     {
 
+        private static int numImg = 0;
         //Clase CInicio que contiene los métodos de acceso y las clases principales
         /// Autor: Antonio Galván Uriza
         /// Fecha: 05-09-21
         /// Versión: 1.0.2.1
-        /// Modificación: 07-09-21
-        /// 
-
-        private static int numImg = 0;
+        /// Modificación: 06-10-21
         public class CInicio : ISujeto, IBridge
         {
             private IComprimir resizer;
@@ -86,12 +84,26 @@ namespace RendimensionImagenes
                 
             }
 
+            //Método de petición para usar los servicios del app
+            /// Autor: Antonio Galván Uriza
+            /// Fecha: 06-10-21
+            /// Versión: 1.0.0.0
+            /// Modificación: 06-10-21
+            /// <param name="pOrigen">Lista de Rutas de origen de las imagenes</param>
+            /// <param name="pDestino">Ruta en la que se colocará la imagen</param>
+            /// <param name="pOpcion">Opción del compresor que se usará</param>
+            /// <param name="pResolucion">Resolución de la nueva imagen</param>
             public bool Peticion(List<string> pOrigen, string pDestino, int pOpcion, int pResolucion)
             {
                 return false;
             }
         }
 
+        //Clase de inicio de la versión 2.0
+        /// Autor: Antonio Galván Uriza
+        /// Fecha: 06-10-21
+        /// Versión: 1.0.0.0
+        /// Modificación: 06-10-21
         public class CInicio2 : ISujeto, IBridge
         {
             private IComprimir resizer;
@@ -100,9 +112,9 @@ namespace RendimensionImagenes
 
             //Método para iniciar sesión en la aplicación
             /// Autor: Antonio Galván Uriza
-            /// Fecha: 05-09-21
-            /// Versión: 1.0.0.3
-            /// Modificación: 07-09-21
+            /// Fecha: 06-10-21
+            /// Versión: 1.0.0.0
+            /// Modificación: 06-10-21
             /// <param name="pUser">Usuario</param>
             /// <param name="pPassword">Contrasñeña del usuario</param>
             public bool Inicio(string pUser, string pPassword)
@@ -121,9 +133,9 @@ namespace RendimensionImagenes
 
             //Método de petición para usar los servicios del app
             /// Autor: Antonio Galván Uriza
-            /// Fecha: 05-09-21
-            /// Versión: 1.0.1.5
-            /// Modificación: 07-09-21
+            /// Fecha: 06-10-21
+            /// Versión: 1.0.0.0
+            /// Modificación: 06-10-21
             /// <param name="pOrigen">Ruta de origen de la imagen</param>
             /// <param name="pDestino">Ruta en la que se colocará la imagen</param>
             /// <param name="pOpcion">Opción del compresor que se usará</param>
@@ -156,6 +168,15 @@ namespace RendimensionImagenes
 
             }
 
+            //Método de petición para usar los servicios del app
+            /// Autor: Antonio Galván Uriza
+            /// Fecha: 06-10-21
+            /// Versión: 1.0.0.0
+            /// Modificación: 06-10-21
+            /// <param name="pOrigen">Lista de Rutas de origen de las imagenes</param>
+            /// <param name="pDestino">Ruta en la que se colocará la imagen</param>
+            /// <param name="pOpcion">Opción del compresor que se usará</param>
+            /// <param name="pResolucion">Resolución de la nueva imagen</param>
             public bool Peticion(List<string> pOrigen, string pDestino, int pOpcion, int pResolucion)
             {
                 //Verifica si el usuario está autenticado
@@ -199,8 +220,8 @@ namespace RendimensionImagenes
             //Método para comprimir con CMagick (framework)
             /// Autor: Antonio Galván Uriza
             /// Fecha: 05-09-21
-            /// Versión: 1.0.0.3
-            /// Modificación: 06-09-21
+            /// Versión: 1.0.0.4
+            /// Modificación: 06-10-21
             /// <param name="pOrigen">Ruta de origen de la imagen</param>
             /// <param name="pDestino">Ruta en la que se colocará la imagen</param>
             /// <param name="pResolucion">Resolución de la nueva imagen</param>
@@ -229,8 +250,8 @@ namespace RendimensionImagenes
             //Método para comprimir Encoder
             /// Autor: Antonio Galván Uriza
             /// Fecha: 05-09-21
-            /// Versión: 1.0.2.1
-            /// Modificación: 07-09-21
+            /// Versión: 1.0.2.3
+            /// Modificación: 06-10-21
             /// <param name="pOrigen">Ruta de origen de la imagen</param>
             /// <param name="pDestino">Ruta en la que se colocará la imagen</param>
             /// <param name="pResolucion">Resolución de la nueva imagen</param>

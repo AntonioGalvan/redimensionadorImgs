@@ -6,8 +6,8 @@ namespace RendimensionImagenes
     //Clase del login
     /// Autor: Antonio Galván Uriza
     /// Fecha: 05-09-21
-    /// Versión: 1.0.0.3
-    /// Modificación: 07-09-21
+    /// Versión: 2.0.0.0
+    /// Modificación: 06-10-21
     public partial class frmLogin : Form
     {
         public static CAbstraccion bridge;
@@ -19,8 +19,8 @@ namespace RendimensionImagenes
         //Método para iniciar sesión
         /// Autor: Antonio Galván Uriza
         /// Fecha: 05-09-21
-        /// Versión: 1.0.0.3
-        /// Modificación: 06-09-21
+        /// Versión: 1.0.0.5
+        /// Modificación: 06-10-21
         /// <param name="sender">Objeto que disparó el evento</param>
         /// <param name="e"> Informacíón del evento</param>
         private void btnInicio_Click(object sender, EventArgs e)

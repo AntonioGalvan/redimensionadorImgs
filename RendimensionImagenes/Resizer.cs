@@ -7,8 +7,8 @@ namespace RendimensionImagenes
     //Clase de interfaz de app principal
     /// Autor: Antonio Galván Uriza
     /// Fecha: 05-09-21
-    /// Versión: 1.0.1.4
-    /// Modificación: 07-09-21
+    /// Versión: 2.0.0.0
+    /// Modificación: 06-10-21
     public partial class Resizer : Form
     {
         private List<string> archivos = new List<string>();
@@ -49,8 +49,8 @@ namespace RendimensionImagenes
         //Método para ingresar ruta de imagen de origen
         /// Autor: Antonio Galván Uriza
         /// Fecha: 05-09-21
-        /// Versión: 1.0.0.0
-        /// Modificación: 05-09-21
+        /// Versión: 1.0.0.2
+        /// Modificación: 06-10-21
         /// <param name="sender">Objeto que disparó el evento</param>
         /// <param name="e"> Informacíón del evento</param>
         private void pbxOrigen_Click(object sender, EventArgs e)
@@ -74,8 +74,8 @@ namespace RendimensionImagenes
         //Método para ingresar ruta de imagen de destino
         /// Autor: Antonio Galván Uriza
         /// Fecha: 05-09-21
-        /// Versión: 1.0.0.0
-        /// Modificación: 05-09-21
+        /// Versión: 1.0.0.2
+        /// Modificación: 06-10-21
         /// <param name="sender">Objeto que disparó el evento</param>
         /// <param name="e"> Informacíón del evento</param>
         private void pbxDestino_Click(object sender, EventArgs e)
@@ -92,8 +92,8 @@ namespace RendimensionImagenes
         //Método para comprimir imagen
         /// Autor: Antonio Galván Uriza
         /// Fecha: 05-09-21
-        /// Versión: 1.0.1.4
-        /// Modificación: 07-09-21
+        /// Versión: 1.0.1.6
+        /// Modificación: 06-10-21
         /// <param name="sender">Objeto que disparó el evento</param>
         /// <param name="e"> Informacíón del evento</param>
         private void btnComprimir_Click(object sender, EventArgs e)
@@ -238,11 +238,25 @@ namespace RendimensionImagenes
             btnComprimir.Visible = true;
         }
 
+        //Método para realizar drag and drop (fallido)
+        /// Autor: Antonio Galván Uriza
+        /// Fecha: 06-10-21
+        /// Versión: 1.0.0.0
+        /// Modificación: 06-10-21
+        /// <param name="sender">Objeto que disparó el evento</param>
+        /// <param name="e"> Informacíón del evento</param>
         private void txtOrigen_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
         }
 
+        //Método para realizar drag and drop (fallido)
+        /// Autor: Antonio Galván Uriza
+        /// Fecha: 06-10-21
+        /// Versión: 1.0.0.0
+        /// Modificación: 06-10-21
+        /// <param name="sender">Objeto que disparó el evento</param>
+        /// <param name="e"> Informacíón del evento</param>
         private void txtOrigen_DragDrop(object sender, DragEventArgs e)
         {
             List<string> archivos = new List<string>();
@@ -250,12 +264,26 @@ namespace RendimensionImagenes
             txtOrigen.Text = "Archivos varios";
         }
 
+        //Método para realizar drag and drop (fallido)
+        /// Autor: Antonio Galván Uriza
+        /// Fecha: 06-10-21
+        /// Versión: 1.0.0.0
+        /// Modificación: 06-10-21
+        /// <param name="sender">Objeto que disparó el evento</param>
+        /// <param name="e"> Informacíón del evento</param>
         private void Resizer_Load(object sender, EventArgs e)
         {
             txtOrigen.AllowDrop = true;
             
         }
 
+        //Método para realizar drag and drop (fallido)
+        /// Autor: Antonio Galván Uriza
+        /// Fecha: 06-10-21
+        /// Versión: 1.0.0.0
+        /// Modificación: 06-10-21
+        /// <param name="sender">Objeto que disparó el evento</param>
+        /// <param name="e"> Informacíón del evento</param>
         private void txtOrigen_MouseDown(object sender, MouseEventArgs e)
         {
             DoDragDrop(this.txtOrigen.ToString(), DragDropEffects.Copy);
