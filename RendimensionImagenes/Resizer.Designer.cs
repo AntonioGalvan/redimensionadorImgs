@@ -58,6 +58,7 @@ namespace RendimensionImagenes
             this.lblExito = new System.Windows.Forms.Label();
             this.btnNuevaImagen = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.pbxTrash = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxDecoracion)).BeginInit();
@@ -70,6 +71,7 @@ namespace RendimensionImagenes
             this.pnlCompresor.SuspendLayout();
             this.pnlExit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxExit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxTrash)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -359,11 +361,11 @@ namespace RendimensionImagenes
             // lblExito
             // 
             this.lblExito.AutoSize = true;
-            this.lblExito.Font = new System.Drawing.Font("Keep Calm Med", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExito.Font = new System.Drawing.Font("Keep Calm Med", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblExito.ForeColor = System.Drawing.Color.DarkSeaGreen;
-            this.lblExito.Location = new System.Drawing.Point(95, 428);
+            this.lblExito.Location = new System.Drawing.Point(85, 434);
             this.lblExito.Name = "lblExito";
-            this.lblExito.Size = new System.Drawing.Size(390, 33);
+            this.lblExito.Size = new System.Drawing.Size(285, 23);
             this.lblExito.TabIndex = 23;
             this.lblExito.Text = "Se ha comprimido con éxito";
             this.lblExito.Visible = false;
@@ -385,12 +387,26 @@ namespace RendimensionImagenes
             this.btnNuevaImagen.Visible = false;
             this.btnNuevaImagen.Click += new System.EventHandler(this.btnNuevaImagen_Click);
             // 
+            // pbxTrash
+            // 
+            this.pbxTrash.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbxTrash.Image = ((System.Drawing.Image)(resources.GetObject("pbxTrash.Image")));
+            this.pbxTrash.Location = new System.Drawing.Point(669, 151);
+            this.pbxTrash.Name = "pbxTrash";
+            this.pbxTrash.Size = new System.Drawing.Size(38, 41);
+            this.pbxTrash.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxTrash.TabIndex = 25;
+            this.pbxTrash.TabStop = false;
+            this.pbxTrash.Visible = false;
+            this.pbxTrash.Click += new System.EventHandler(this.pbxTrash_Click);
+            // 
             // Resizer
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1003, 509);
+            this.Controls.Add(this.pbxTrash);
             this.Controls.Add(this.btnNuevaImagen);
             this.Controls.Add(this.lblExito);
             this.Controls.Add(this.lblCalidad);
@@ -430,6 +446,7 @@ namespace RendimensionImagenes
             this.pnlCompresor.PerformLayout();
             this.pnlExit.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxExit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxTrash)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -465,5 +482,6 @@ namespace RendimensionImagenes
         private System.Windows.Forms.Label lblExito;
         private System.Windows.Forms.Button btnNuevaImagen;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.PictureBox pbxTrash;
     }
 }

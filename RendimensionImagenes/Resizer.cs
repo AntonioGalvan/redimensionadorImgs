@@ -7,8 +7,8 @@ namespace RendimensionImagenes
     //Clase de interfaz de app principal
     /// Autor: Antonio Galván Uriza
     /// Fecha: 05-09-21
-    /// Versión: 2.0.0.0
-    /// Modificación: 06-10-21
+    /// Versión: 2.0.0.3
+    /// Modificación: 09-11-21
     public partial class Resizer : Form
     {
         private List<string> archivos = new List<string>();
@@ -67,7 +67,7 @@ namespace RendimensionImagenes
                 {
                     txtOrigen.Text = $"Archivos [{archivos.Count}]";
                 }
-                
+                pbxTrash.Visible = true;
             }
         }
 
@@ -160,6 +160,8 @@ namespace RendimensionImagenes
                             origen = "";
                             destino = "";
                             resolucion = 0;
+                            archivos.Clear();
+                            pbxTrash.Visible = false;
                         }
                         else
                         {
@@ -178,6 +180,8 @@ namespace RendimensionImagenes
                             origen = "";
                             destino = "";
                             resolucion = 0;
+                            archivos.Clear();
+                            pbxTrash.Visible = false;
                         }
                         else
                         {
@@ -287,6 +291,21 @@ namespace RendimensionImagenes
         private void txtOrigen_MouseDown(object sender, MouseEventArgs e)
         {
             DoDragDrop(this.txtOrigen.ToString(), DragDropEffects.Copy);
+        }
+
+        //Método para vaciar la lista de imágenes
+        /// Autor: Antonio Galván Uriza
+        /// Fecha: 09-11-21
+        /// Versión: 1.0.0.0
+        /// Modificación: 09-11-21
+        /// <param name="sender">Objeto que disparó el evento</param>
+        /// <param name="e"> Informacíón del evento</param>
+        private void pbxTrash_Click(object sender, EventArgs e)
+        {
+            archivos.Clear();
+            pbxTrash.Visible = false;
+            origen = "";
+            txtOrigen.Text = origen;
         }
     }
 }

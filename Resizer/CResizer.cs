@@ -2,16 +2,129 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using ImageMagick;
 
-namespace RendimensionImagenes
+namespace Resizer
 {
+
+    //Clase para alternar entre versiones
+    /// Autor: Antonio Galván Uriza
+    /// Fecha: 06-10-21
+    /// Versión: 2.0.0.0
+    /// Modificación: 09-11-21
+    public class CAbstraccion
+    {
+        //Propiedad para realizar instancia de Singleton
+        private static CAbstraccion instancia;
+
+        //Propiedad para utilizar patrón bridge
+        private IBridge sesion;
+        private CAbstraccion(int pTipo)
+        {
+            if (pTipo == 1)
+                sesion = new CProxy.CInicio();
+            if (pTipo == 2)
+                sesion = new CProxy.CInicio2();
+        }
+
+        /// Método para instanciar la clase
+        /// Autor: Antonio Galván Uriza
+        /// Fecha: 09-11-21
+        /// Versión: 1.0.0.0
+        /// Modificación: 09-11-21
+        /// <param name="pUser">Contiene el usuario</param>
+        public static CAbstraccion inicial(int pTipo)
+        {
+            if (instancia == null)
+            {
+                instancia = new CAbstraccion(pTipo);
+            }
+
+            return instancia;
+        }
+
+        //Método para iniciar sesión
+        /// Autor: Antonio Galván Uriza
+        /// Fecha: 06-10-21
+        /// Versión: 1.0.0.0
+        /// Modificación: 06-10-21
+        /// <param name="pUser">Contiene el usuario</param>
+        /// <param name="pPassword">Contiene la contraseña</param>
+        public bool iniciarSesion(string pUser, string pPassword)
+        {
+            return sesion.Inicio(pUser, pPassword);
+        }
+
+        //Método para comprimir
+        /// Autor: Antonio Galván Uriza
+        /// Fecha: 06-10-21
+        /// Versión: 1.0.0.0
+        /// Modificación: 06-10-21
+        /// <param name="pOrigen">Contiene el origen</param>
+        /// <param name="pDestino">Contiene el destino</param>
+        /// <param name="pOpcion">Contiene la opcion de compresión</param>
+        /// <param name="pResolucion">Contiene la resolución</param>
+        public bool comprimir(string pOrigen, string pDestino, int pOpcion, int pResolucion)
+        {
+            return sesion.Peticion(pOrigen, pDestino, pOpcion, pResolucion);
+        }
+
+        //Método para comprimir varios archivos
+        /// Autor: Antonio Galván Uriza
+        /// Fecha: 06-10-21
+        /// Versión: 1.0.0.0
+        /// Modificación: 06-10-21
+        /// <param name="pArchivos">Contiene los orígenes</param>
+        /// <param name="pDestino">Contiene el destino</param>
+        /// <param name="pOpcion">Contiene la opcion de compresión</param>
+        /// <param name="pResolucion">Contiene la resolución</param>
+        public bool comprimir(List<string> pArchivos, string pDestino, int pOpcion, int pResolucion)
+        {
+            return sesion.Peticion(pArchivos, pDestino, pOpcion, pResolucion);
+        }
+    }
+
+    //Interfaz para bridge
+    /// Autor: Antonio Galván Uriza
+    /// Fecha: 06-10-21
+    /// Versión: 1.0.0.0
+    /// Modificación: 06-10-21
+    public interface IBridge
+    {
+        bool Inicio(string pUser, string pPassword);
+        bool Peticion(string pOrigen, string pDestino, int pOpcion, int pResolucion);
+        bool Peticion(List<string> pOrigen, string pDestino, int pOpcion, int pResolucion);
+    }
+
+    //Interfaz de patrón estrategia
+    /// Autor: Antonio Galván Uriza
+    /// Fecha: 05-09-21
+    /// Versión: 1.0.0.3
+    /// Modificación: 05-09-21
+    public interface IComprimir
+    {
+        void comprimir(string pOrigen, string pDestino, int pResolucion);
+    }
+
+    //Interfaz de patrón proxy
+    /// Autor: Antonio Galván Uriza
+    /// Fecha: 05-09-21
+    /// Versión: 1.0.0.3
+    /// Modificación: 06-10-21
+    public interface ISujeto
+    {
+        bool Inicio(string pUser, string pPassword);
+        bool Peticion(string pOrigen, string pDestino, int pOpcion, int pResolucion);
+
+    }
+
     //Clase Proxy
     /// Autor: Antonio Galván Uriza
     /// Fecha: 05-09-21
     /// Versión: 2.0.0.1
     /// Modificación: 07-09-21
-    class CProxy
+    public class CProxy
     {
 
         private static int numImg = 0;
@@ -59,7 +172,7 @@ namespace RendimensionImagenes
             public bool Peticion(string pOrigen, string pDestino, int pOpcion, int pResolucion)
             {
                 //Verifica si el usuario está autenticado
-                if(IsAuthenticated == true)
+                if (IsAuthenticated == true)
                 {
                     if (pOpcion == 1)
                         resizer = new CClasico();
@@ -75,13 +188,13 @@ namespace RendimensionImagenes
                     catch (Exception)
                     {
                         return false;
-                    } 
+                    }
                 }
                 else
                 {
                     return false;
                 }
-                
+
             }
 
             //Método de petición para usar los servicios del app
@@ -190,10 +303,10 @@ namespace RendimensionImagenes
                     //Trata de realizar la compresión
                     try
                     {
-                        foreach(string img in pOrigen)
+                        foreach (string img in pOrigen)
                         {
                             resizer.comprimir(img, pDestino, pResolucion);
-                        }  
+                        }
                         return true;
                     }
                     catch (Exception)
@@ -215,19 +328,25 @@ namespace RendimensionImagenes
         /// Fecha: 05-09-21
         /// Versión: 1.0.0.3
         /// Modificación: 06-09-21
-        private class CMagick:IComprimir
+        private class CMagick : IComprimir
         {
             //Método para comprimir con CMagick (framework)
             /// Autor: Antonio Galván Uriza
             /// Fecha: 05-09-21
-            /// Versión: 1.0.0.4
-            /// Modificación: 06-10-21
+            /// Versión: 1.0.1.0
+            /// Modificación: 10-11-21
             /// <param name="pOrigen">Ruta de origen de la imagen</param>
             /// <param name="pDestino">Ruta en la que se colocará la imagen</param>
             /// <param name="pResolucion">Resolución de la nueva imagen</param>
             public void comprimir(string pOrigen, string pDestino, int pResolucion)
             {
-                pOrigen = @""+pOrigen;
+                pOrigen = @"" + pOrigen;
+
+                while (File.Exists(@"" + pDestino + "/img-min" + numImg + ".jpg"))
+                {
+                    numImg++;
+                }
+
                 pDestino = @"" + pDestino + "/img-min" + numImg + ".jpg";
 
                 using (MagickImage oMagickImage = new MagickImage(pOrigen))
@@ -245,19 +364,25 @@ namespace RendimensionImagenes
         /// Fecha: 05-09-21
         /// Versión: 1.0.2.1
         /// Modificación: 07-09-21
-        private class CClasico:IComprimir
+        private class CClasico : IComprimir
         {
             //Método para comprimir Encoder
             /// Autor: Antonio Galván Uriza
             /// Fecha: 05-09-21
-            /// Versión: 1.0.2.3
-            /// Modificación: 06-10-21
+            /// Versión: 1.0.3.3
+            /// Modificación: 10-11-21
             /// <param name="pOrigen">Ruta de origen de la imagen</param>
             /// <param name="pDestino">Ruta en la que se colocará la imagen</param>
             /// <param name="pResolucion">Resolución de la nueva imagen</param>
             public void comprimir(string pOrigen, string pDestino, int pResolucion)
             {
                 pOrigen = @"" + pOrigen;
+
+                while (File.Exists(@"" + pDestino + "/img-min" + numImg + ".jpg"))
+                {
+                    numImg++;
+                }
+
                 pDestino = @"" + pDestino + "/img-min" + numImg + ".jpg";
 
                 using (Bitmap mybitmab = new Bitmap(pOrigen))
@@ -295,4 +420,6 @@ namespace RendimensionImagenes
 
         }
     }
+
+
 }
