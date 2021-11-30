@@ -7,8 +7,8 @@ namespace RendimensionImagenes
     //Clase del login
     /// Autor: Antonio Galván Uriza
     /// Fecha: 05-09-21
-    /// Versión: 2.0.0.3
-    /// Modificación: 09-11-21
+    /// Versión: 2.0.0.4
+    /// Modificación: 30-11-21
     public partial class frmLogin : Form
     {
         public static CAbstraccion bridge;
@@ -63,6 +63,19 @@ namespace RendimensionImagenes
         private void frmLogin_Load(object sender, EventArgs e)
         {
             cbxVersion.SelectedIndex = 0;
+        }
+
+        //Método para Acceder al registro
+        /// Autor: Antonio Galván Uriza
+        /// Fecha: 30-11-21
+        /// Versión: 1.0.0.0
+        /// Modificación: 30-11-21
+        /// <param name="sender">Objeto que disparó el evento</param>
+        /// <param name="e"> Informacíón del evento</param>
+        private void lklSignUp_Click(object sender, EventArgs e)
+        {
+            new frmSignUp().Show();
+            this.Hide();
         }
     }
 }
