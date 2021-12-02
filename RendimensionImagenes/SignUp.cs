@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resizer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,8 +14,8 @@ namespace RendimensionImagenes
     //Clase para registrarse
     /// Autor: Antonio Galván Uriza
     /// Fecha: 30-11-21
-    /// Versión: 2.0.0.3
-    /// Modificación: 30-11-21
+    /// Versión: 2.0.1.3
+    /// Modificación: 01-12-21
     public partial class frmSignUp : Form
     {
         public frmSignUp()
@@ -209,8 +210,8 @@ namespace RendimensionImagenes
         //Método para realizar el registro
         /// Autor: Antonio Galván Uriza
         /// Fecha: 30-11-21
-        /// Versión: 1.0.0.0
-        /// Modificación: 30-11-21
+        /// Versión: 1.0.2.0
+        /// Modificación: 01-12-21
         /// <param name="sender">Objeto que disparó el evento</param>
         /// <param name="e"> Informacíón del evento</param>
         private void btnSignUp_Click(object sender, EventArgs e)
@@ -239,7 +240,27 @@ namespace RendimensionImagenes
                         }
                         else
                         {
-                            MessageBox.Show("Enhorabuena");
+                            if (frmLogin.version == 0)
+                                frmLogin.bridge = CAbstraccion.inicial(1);
+                            else
+                                frmLogin.bridge = CAbstraccion.inicial(2);
+
+                            if (frmLogin.bridge.registrar(txtNombre.Text, txtUsuario.Text, txtPassword.Text))
+                            {
+                                if (frmLogin.bridge.iniciarSesion(txtUsuario.Text, txtPassword.Text))
+                                {
+                                    new Resizer().Show();
+                                    this.Hide();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No ha sido posible iniciar sesión");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("El usuario ya fué registrado");
+                            }
                         }
                     }
                 }

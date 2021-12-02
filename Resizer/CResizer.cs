@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using ImageMagick;
 
 namespace Resizer
@@ -11,8 +12,8 @@ namespace Resizer
     //Clase para alternar entre versiones
     /// Autor: Antonio Galván Uriza
     /// Fecha: 06-10-21
-    /// Versión: 2.0.0.0
-    /// Modificación: 09-11-21
+    /// Versión: 2.0.0.3
+    /// Modificación: 01-12-21
     public class CAbstraccion
     {
         //Propiedad para realizar instancia de Singleton
@@ -56,6 +57,29 @@ namespace Resizer
             return sesion.Inicio(pUser, pPassword);
         }
 
+        //Método para registrar usuarios
+        /// Autor: Antonio Galván Uriza
+        /// Fecha: 01-12-21
+        /// Versión: 1.0.0.0
+        /// Modificación: 01-12-21
+        /// <param name="pNombre">Contiene el usuario</param>
+        /// <param name="pUsuario">Contiene el usuario</param>
+        /// <param name="pPassword">Contiene la contraseña</param>
+        public bool registrar(string pNombre, string pUsuario, string pPassword)
+        {
+            return sesion.Registro(pNombre, pUsuario, pPassword);
+        }
+
+        //Método para obtener datos de usuarios
+        /// Autor: Antonio Galván Uriza
+        /// Fecha: 01-12-21
+        /// Versión: 1.0.0.0
+        /// Modificación: 01-12-21
+        public string obtenerDatos()
+        {
+            return sesion.obtenerNombre();
+        }
+
         //Método para comprimir
         /// Autor: Antonio Galván Uriza
         /// Fecha: 06-10-21
@@ -88,13 +112,15 @@ namespace Resizer
     //Interfaz para bridge
     /// Autor: Antonio Galván Uriza
     /// Fecha: 06-10-21
-    /// Versión: 1.0.0.0
-    /// Modificación: 06-10-21
+    /// Versión: 1.0.0.1
+    /// Modificación: 01-12-21
     public interface IBridge
     {
         bool Inicio(string pUser, string pPassword);
+        bool Registro(string pNombre, string pUser, string pPassword);
         bool Peticion(string pOrigen, string pDestino, int pOpcion, int pResolucion);
         bool Peticion(List<string> pOrigen, string pDestino, int pOpcion, int pResolucion);
+        string obtenerNombre();
     }
 
     //Interfaz de patrón estrategia
@@ -122,35 +148,53 @@ namespace Resizer
     //Clase Proxy
     /// Autor: Antonio Galván Uriza
     /// Fecha: 05-09-21
-    /// Versión: 2.0.0.1
-    /// Modificación: 07-09-21
+    /// Versión: 2.0.1.1
+    /// Modificación: 01-12-21
     public class CProxy
     {
 
         private static int numImg = 0;
+        private static List<CUsuario> usuarios = new List<CUsuario>();
+
+
         //Clase CInicio que contiene los métodos de acceso y las clases principales
         /// Autor: Antonio Galván Uriza
         /// Fecha: 05-09-21
-        /// Versión: 1.0.2.1
-        /// Modificación: 06-10-21
+        /// Versión: 1.0.3.1
+        /// Modificación: 01-12-21
         public class CInicio : ISujeto, IBridge
         {
             private IComprimir resizer;
             private static bool isAuthenticated = false;
+            private static string nombre = "";
+
+            public static string Nombre { get => nombre; }
             public static bool IsAuthenticated { get => isAuthenticated; private set => isAuthenticated = value; }
 
             //Método para iniciar sesión en la aplicación
             /// Autor: Antonio Galván Uriza
             /// Fecha: 05-09-21
             /// Versión: 1.0.0.3
-            /// Modificación: 07-09-21
+            /// Modificación: 01-12-21
             /// <param name="pUser">Usuario</param>
-            /// <param name="pPassword">Contrasñeña del usuario</param>
+            /// <param name="pPassword">Contraseña del usuario</param>
             public bool Inicio(string pUser, string pPassword)
             {
-                //Autenticación básica
-                if (pUser == "admin" && pPassword == "admin123")
+                //si el archivo existe lo deserializamos y obtenemos los usuarios
+                if (File.Exists("usuario.rzr"))
                 {
+                    BinaryFormatter formateador = new BinaryFormatter();
+                    Stream miStream;
+
+                    miStream = new FileStream("usuario.rzr", FileMode.Open, FileAccess.Read, FileShare.None);
+                    usuarios = (List<CUsuario>)formateador.Deserialize(miStream);
+                    miStream.Close();
+                }
+
+                //Autenticación básica
+                if (usuarios.Exists(x => x.Usuario == pUser && x.Password == pPassword))
+                {
+                    nombre = usuarios.Find(x => x.Usuario == pUser).Nombre;
                     IsAuthenticated = true;
                     return true;
                 }
@@ -158,6 +202,69 @@ namespace Resizer
                 {
                     return false;
                 }
+            }
+
+            //Método para registrarse en la aplicación
+            /// Autor: Antonio Galván Uriza
+            /// Fecha: 01-12-21
+            /// Versión: 1.0.0.0
+            /// Modificación: 01-12-21
+            /// <param name="pNombre">nombre</param>
+            /// <param name="pUser">Usuario</param>
+            /// <param name="pPassword">Contraseña del usuario</param>
+            public bool Registro(string pNombre, string pUser, string pPassword)
+            {
+                try
+                {
+                    BinaryFormatter formateador = new BinaryFormatter();
+                    Stream miStream;
+
+                    //Obtenemos los usuarios registrados para ver si alguno ya existe
+                    if (File.Exists("usuario.rzr"))
+                    {
+                        miStream = new FileStream("usuario.rzr", FileMode.Open, FileAccess.Read, FileShare.None);
+                        usuarios = (List<CUsuario>)formateador.Deserialize(miStream);
+                        miStream.Close();
+                    }
+
+
+                    CUsuario usuario = new CUsuario();
+
+                    usuario.Nombre = pNombre;
+                    usuario.Usuario = pUser;
+                    usuario.Password = pPassword;
+
+                    //Si el usuario no existe lo registramos y serializamos
+                    if (!usuarios.Exists(x => x.Usuario == usuario.Usuario))
+                    {
+                        usuarios.Add(usuario);
+
+                        miStream = new FileStream("usuario.rzr", FileMode.Create, FileAccess.Write, FileShare.None);
+                        formateador.Serialize(miStream, usuarios);
+                        miStream.Close();
+
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception)
+                {
+
+                    return false;
+                }
+            }
+
+            //Método para obtener los datos del usuario
+            /// Autor: Antonio Galván Uriza
+            /// Fecha: 01-12-21
+            /// Versión: 1.0.0.0
+            /// Modificación: 01-12-21
+            public string obtenerNombre()
+            {
+                return Nombre;
             }
 
             //Método de petición para usar los servicios del app
@@ -215,26 +322,41 @@ namespace Resizer
         //Clase de inicio de la versión 2.0
         /// Autor: Antonio Galván Uriza
         /// Fecha: 06-10-21
-        /// Versión: 1.0.0.0
-        /// Modificación: 06-10-21
+        /// Versión: 1.0.1.0
+        /// Modificación: 01-12-21
         public class CInicio2 : ISujeto, IBridge
         {
             private IComprimir resizer;
             private static bool isAuthenticated = false;
+            private static string nombre = "";
+
+            public static string Nombre { get => nombre; }
             public static bool IsAuthenticated { get => isAuthenticated; private set => isAuthenticated = value; }
 
+            
             //Método para iniciar sesión en la aplicación
             /// Autor: Antonio Galván Uriza
             /// Fecha: 06-10-21
-            /// Versión: 1.0.0.0
-            /// Modificación: 06-10-21
+            /// Versión: 1.0.0.3
+            /// Modificación: 01-12-21
             /// <param name="pUser">Usuario</param>
             /// <param name="pPassword">Contrasñeña del usuario</param>
             public bool Inicio(string pUser, string pPassword)
             {
-                //Autenticación básica
-                if (pUser == "admin" && pPassword == "admin123")
+                if (File.Exists("usuario.rzr"))
                 {
+                    BinaryFormatter formateador = new BinaryFormatter();
+                    Stream miStream;
+
+                    miStream = new FileStream("usuario.rzr", FileMode.Open, FileAccess.Read, FileShare.None);
+                    usuarios = (List<CUsuario>)formateador.Deserialize(miStream);
+                    miStream.Close();
+                }
+
+                //Autenticación básica
+                if (usuarios.Exists(x => x.Usuario == pUser && x.Password == pPassword))
+                {
+                    nombre = usuarios.Find(x => x.Usuario == pUser).Nombre;
                     IsAuthenticated = true;
                     return true;
                 }
@@ -242,6 +364,67 @@ namespace Resizer
                 {
                     return false;
                 }
+            }
+
+            //Método para registrar usuario en la aplicación
+            /// Autor: Antonio Galván Uriza
+            /// Fecha: 01-12-21
+            /// Versión: 1.0.0.0
+            /// Modificación: 01-12-21
+            /// <param name="pNombre">Nombre</param>
+            /// <param name="pUser">Usuario</param>
+            /// <param name="pPassword">Contraseña del usuario</param>
+            public bool Registro(string pNombre, string pUser, string pPassword)
+            {
+                try
+                {
+                    BinaryFormatter formateador = new BinaryFormatter();
+                    Stream miStream;
+
+                    if (File.Exists("usuario.rzr"))
+                    {
+                        miStream = new FileStream("usuario.rzr", FileMode.Open, FileAccess.Read, FileShare.None);
+                        usuarios = (List<CUsuario>)formateador.Deserialize(miStream);
+                        miStream.Close();
+                    }
+
+
+                    CUsuario usuario = new CUsuario();
+
+                    usuario.Nombre = pNombre;
+                    usuario.Usuario = pUser;
+                    usuario.Password = pPassword;
+
+                    if (!usuarios.Exists(x => x.Usuario == usuario.Usuario))
+                    {
+                        usuarios.Add(usuario);
+
+                        miStream = new FileStream("usuario.rzr", FileMode.Create, FileAccess.Write, FileShare.None);
+                        formateador.Serialize(miStream, usuarios);
+                        miStream.Close();
+
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception es)
+                {
+
+                    throw es;
+                }
+            }
+
+            //Método para obtener los datos del usuario
+            /// Autor: Antonio Galván Uriza
+            /// Fecha: 01-12-21
+            /// Versión: 1.0.0.0
+            /// Modificación: 01-12-21
+            public string obtenerNombre()
+            {
+                return Nombre;
             }
 
             //Método de petición para usar los servicios del app

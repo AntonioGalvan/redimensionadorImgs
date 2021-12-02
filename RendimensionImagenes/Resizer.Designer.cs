@@ -59,6 +59,7 @@ namespace RendimensionImagenes
             this.btnNuevaImagen = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.pbxTrash = new System.Windows.Forms.PictureBox();
+            this.lblNombreUsuario = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxDecoracion)).BeginInit();
@@ -91,7 +92,7 @@ namespace RendimensionImagenes
             // 
             this.pbxLogo.Image = ((System.Drawing.Image)(resources.GetObject("pbxLogo.Image")));
             this.pbxLogo.Location = new System.Drawing.Point(9, 10);
-            this.pbxLogo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pbxLogo.Margin = new System.Windows.Forms.Padding(2);
             this.pbxLogo.Name = "pbxLogo";
             this.pbxLogo.Size = new System.Drawing.Size(101, 70);
             this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -102,7 +103,7 @@ namespace RendimensionImagenes
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(276, 35);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(75, 41);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -113,7 +114,7 @@ namespace RendimensionImagenes
             // 
             this.pbxDecoracion.Image = ((System.Drawing.Image)(resources.GetObject("pbxDecoracion.Image")));
             this.pbxDecoracion.Location = new System.Drawing.Point(563, -2);
-            this.pbxDecoracion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pbxDecoracion.Margin = new System.Windows.Forms.Padding(2);
             this.pbxDecoracion.Name = "pbxDecoracion";
             this.pbxDecoracion.Size = new System.Drawing.Size(191, 419);
             this.pbxDecoracion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -126,7 +127,7 @@ namespace RendimensionImagenes
             this.pbxOrigen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbxOrigen.Image = ((System.Drawing.Image)(resources.GetObject("pbxOrigen.Image")));
             this.pbxOrigen.Location = new System.Drawing.Point(9, 10);
-            this.pbxOrigen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pbxOrigen.Margin = new System.Windows.Forms.Padding(2);
             this.pbxOrigen.Name = "pbxOrigen";
             this.pbxOrigen.Size = new System.Drawing.Size(27, 28);
             this.pbxOrigen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -140,7 +141,7 @@ namespace RendimensionImagenes
             this.pnlOrigen.Controls.Add(this.pbxOrigen);
             this.pnlOrigen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnlOrigen.Location = new System.Drawing.Point(67, 116);
-            this.pnlOrigen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlOrigen.Margin = new System.Windows.Forms.Padding(2);
             this.pnlOrigen.Name = "pnlOrigen";
             this.pnlOrigen.Size = new System.Drawing.Size(44, 47);
             this.pnlOrigen.TabIndex = 14;
@@ -150,7 +151,7 @@ namespace RendimensionImagenes
             this.pnlOrigenPath.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnlOrigenPath.Controls.Add(this.txtOrigen);
             this.pnlOrigenPath.Location = new System.Drawing.Point(128, 116);
-            this.pnlOrigenPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlOrigenPath.Margin = new System.Windows.Forms.Padding(2);
             this.pnlOrigenPath.Name = "pnlOrigenPath";
             this.pnlOrigenPath.Size = new System.Drawing.Size(370, 47);
             this.pnlOrigenPath.TabIndex = 15;
@@ -163,7 +164,7 @@ namespace RendimensionImagenes
             this.txtOrigen.Enabled = false;
             this.txtOrigen.Font = new System.Drawing.Font("Roboto Lt", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtOrigen.Location = new System.Drawing.Point(13, 14);
-            this.txtOrigen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtOrigen.Margin = new System.Windows.Forms.Padding(2);
             this.txtOrigen.Multiline = true;
             this.txtOrigen.Name = "txtOrigen";
             this.txtOrigen.Size = new System.Drawing.Size(345, 26);
@@ -177,7 +178,7 @@ namespace RendimensionImagenes
             this.pnlDestinoPath.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnlDestinoPath.Controls.Add(this.txtDestino);
             this.pnlDestinoPath.Location = new System.Drawing.Point(128, 181);
-            this.pnlDestinoPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlDestinoPath.Margin = new System.Windows.Forms.Padding(2);
             this.pnlDestinoPath.Name = "pnlDestinoPath";
             this.pnlDestinoPath.Size = new System.Drawing.Size(370, 47);
             this.pnlDestinoPath.TabIndex = 17;
@@ -189,7 +190,7 @@ namespace RendimensionImagenes
             this.txtDestino.Enabled = false;
             this.txtDestino.Font = new System.Drawing.Font("Roboto Lt", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDestino.Location = new System.Drawing.Point(13, 14);
-            this.txtDestino.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDestino.Margin = new System.Windows.Forms.Padding(2);
             this.txtDestino.Multiline = true;
             this.txtDestino.Name = "txtDestino";
             this.txtDestino.Size = new System.Drawing.Size(345, 26);
@@ -201,7 +202,7 @@ namespace RendimensionImagenes
             this.pnlDestino.Controls.Add(this.pbxDestino);
             this.pnlDestino.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnlDestino.Location = new System.Drawing.Point(67, 181);
-            this.pnlDestino.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlDestino.Margin = new System.Windows.Forms.Padding(2);
             this.pnlDestino.Name = "pnlDestino";
             this.pnlDestino.Size = new System.Drawing.Size(44, 47);
             this.pnlDestino.TabIndex = 16;
@@ -211,7 +212,7 @@ namespace RendimensionImagenes
             this.pbxDestino.BackColor = System.Drawing.Color.Transparent;
             this.pbxDestino.Image = ((System.Drawing.Image)(resources.GetObject("pbxDestino.Image")));
             this.pbxDestino.Location = new System.Drawing.Point(9, 10);
-            this.pbxDestino.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pbxDestino.Margin = new System.Windows.Forms.Padding(2);
             this.pbxDestino.Name = "pbxDestino";
             this.pbxDestino.Size = new System.Drawing.Size(27, 28);
             this.pbxDestino.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -228,7 +229,7 @@ namespace RendimensionImagenes
             this.btnComprimir.Font = new System.Drawing.Font("Keep Calm Med", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnComprimir.ForeColor = System.Drawing.Color.White;
             this.btnComprimir.Location = new System.Drawing.Point(184, 340);
-            this.btnComprimir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnComprimir.Margin = new System.Windows.Forms.Padding(2);
             this.btnComprimir.Name = "btnComprimir";
             this.btnComprimir.Size = new System.Drawing.Size(200, 45);
             this.btnComprimir.TabIndex = 18;
@@ -250,7 +251,7 @@ namespace RendimensionImagenes
             "960 x 540",
             "640 x 480"});
             this.cbxResolucion.Location = new System.Drawing.Point(341, 290);
-            this.cbxResolucion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbxResolucion.Margin = new System.Windows.Forms.Padding(2);
             this.cbxResolucion.Name = "cbxResolucion";
             this.cbxResolucion.Size = new System.Drawing.Size(157, 25);
             this.cbxResolucion.TabIndex = 19;
@@ -261,7 +262,7 @@ namespace RendimensionImagenes
             this.pnlCompresor.Controls.Add(this.rdbMagick);
             this.pnlCompresor.Controls.Add(this.rdbClasico);
             this.pnlCompresor.Location = new System.Drawing.Point(69, 290);
-            this.pnlCompresor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlCompresor.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCompresor.Name = "pnlCompresor";
             this.pnlCompresor.Size = new System.Drawing.Size(151, 25);
             this.pnlCompresor.TabIndex = 20;
@@ -271,7 +272,7 @@ namespace RendimensionImagenes
             this.rdbMagick.AutoSize = true;
             this.rdbMagick.Font = new System.Drawing.Font("Roboto Lt", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbMagick.Location = new System.Drawing.Point(71, 2);
-            this.rdbMagick.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rdbMagick.Margin = new System.Windows.Forms.Padding(2);
             this.rdbMagick.Name = "rdbMagick";
             this.rdbMagick.Size = new System.Drawing.Size(72, 21);
             this.rdbMagick.TabIndex = 0;
@@ -285,7 +286,7 @@ namespace RendimensionImagenes
             this.rdbClasico.Checked = true;
             this.rdbClasico.Font = new System.Drawing.Font("Roboto Lt", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbClasico.Location = new System.Drawing.Point(3, 2);
-            this.rdbClasico.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rdbClasico.Margin = new System.Windows.Forms.Padding(2);
             this.rdbClasico.Name = "rdbClasico";
             this.rdbClasico.Size = new System.Drawing.Size(73, 21);
             this.rdbClasico.TabIndex = 0;
@@ -322,7 +323,7 @@ namespace RendimensionImagenes
             this.pnlExit.BackColor = System.Drawing.Color.IndianRed;
             this.pnlExit.Controls.Add(this.pbxExit);
             this.pnlExit.Location = new System.Drawing.Point(9, 370);
-            this.pnlExit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlExit.Margin = new System.Windows.Forms.Padding(2);
             this.pnlExit.Name = "pnlExit";
             this.pnlExit.Size = new System.Drawing.Size(34, 34);
             this.pnlExit.TabIndex = 16;
@@ -334,7 +335,7 @@ namespace RendimensionImagenes
             this.pbxExit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbxExit.Image = ((System.Drawing.Image)(resources.GetObject("pbxExit.Image")));
             this.pbxExit.Location = new System.Drawing.Point(8, 6);
-            this.pbxExit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pbxExit.Margin = new System.Windows.Forms.Padding(2);
             this.pbxExit.Name = "pbxExit";
             this.pbxExit.Size = new System.Drawing.Size(20, 24);
             this.pbxExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -376,7 +377,7 @@ namespace RendimensionImagenes
             "80L",
             "90L"});
             this.cbxCalidad.Location = new System.Drawing.Point(341, 290);
-            this.cbxCalidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbxCalidad.Margin = new System.Windows.Forms.Padding(2);
             this.cbxCalidad.Name = "cbxCalidad";
             this.cbxCalidad.Size = new System.Drawing.Size(157, 25);
             this.cbxCalidad.TabIndex = 22;
@@ -403,7 +404,7 @@ namespace RendimensionImagenes
             this.btnNuevaImagen.Font = new System.Drawing.Font("Keep Calm Med", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNuevaImagen.ForeColor = System.Drawing.SystemColors.Control;
             this.btnNuevaImagen.Location = new System.Drawing.Point(365, 332);
-            this.btnNuevaImagen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNuevaImagen.Margin = new System.Windows.Forms.Padding(2);
             this.btnNuevaImagen.Name = "btnNuevaImagen";
             this.btnNuevaImagen.Size = new System.Drawing.Size(132, 61);
             this.btnNuevaImagen.TabIndex = 24;
@@ -417,7 +418,7 @@ namespace RendimensionImagenes
             this.pbxTrash.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbxTrash.Image = ((System.Drawing.Image)(resources.GetObject("pbxTrash.Image")));
             this.pbxTrash.Location = new System.Drawing.Point(502, 123);
-            this.pbxTrash.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pbxTrash.Margin = new System.Windows.Forms.Padding(2);
             this.pbxTrash.Name = "pbxTrash";
             this.pbxTrash.Size = new System.Drawing.Size(28, 33);
             this.pbxTrash.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -426,12 +427,25 @@ namespace RendimensionImagenes
             this.pbxTrash.Visible = false;
             this.pbxTrash.Click += new System.EventHandler(this.pbxTrash_Click);
             // 
+            // lblNombreUsuario
+            // 
+            this.lblNombreUsuario.AutoSize = true;
+            this.lblNombreUsuario.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblNombreUsuario.Font = new System.Drawing.Font("Keep Calm Med", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreUsuario.Location = new System.Drawing.Point(658, 0);
+            this.lblNombreUsuario.Name = "lblNombreUsuario";
+            this.lblNombreUsuario.Padding = new System.Windows.Forms.Padding(5);
+            this.lblNombreUsuario.Size = new System.Drawing.Size(94, 31);
+            this.lblNombreUsuario.TabIndex = 0;
+            this.lblNombreUsuario.Text = "Antonio";
+            // 
             // Resizer
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 414);
+            this.Controls.Add(this.lblNombreUsuario);
             this.Controls.Add(this.pbxTrash);
             this.Controls.Add(this.btnNuevaImagen);
             this.Controls.Add(this.lblExito);
@@ -453,7 +467,7 @@ namespace RendimensionImagenes
             this.Controls.Add(this.pnlOrigen);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Resizer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Resizer";
@@ -510,5 +524,6 @@ namespace RendimensionImagenes
         private System.Windows.Forms.Button btnNuevaImagen;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.PictureBox pbxTrash;
+        private System.Windows.Forms.Label lblNombreUsuario;
     }
 }

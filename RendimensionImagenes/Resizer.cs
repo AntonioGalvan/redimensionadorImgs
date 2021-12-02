@@ -7,8 +7,8 @@ namespace RendimensionImagenes
     //Clase de interfaz de app principal
     /// Autor: Antonio Galván Uriza
     /// Fecha: 05-09-21
-    /// Versión: 2.0.0.3
-    /// Modificación: 09-11-21
+    /// Versión: 2.0.0.4
+    /// Modificación: 01-12-21
     public partial class Resizer : Form
     {
         private List<string> archivos = new List<string>();
@@ -268,17 +268,17 @@ namespace RendimensionImagenes
             txtOrigen.Text = "Archivos varios";
         }
 
-        //Método para realizar drag and drop (fallido)
+        //Método para realizar drag and drop (fallido) y obtiene el nombre del usuario
         /// Autor: Antonio Galván Uriza
         /// Fecha: 06-10-21
-        /// Versión: 1.0.0.0
-        /// Modificación: 06-10-21
+        /// Versión: 1.0.0.1
+        /// Modificación: 01-12-21
         /// <param name="sender">Objeto que disparó el evento</param>
         /// <param name="e"> Informacíón del evento</param>
         private void Resizer_Load(object sender, EventArgs e)
         {
+            lblNombreUsuario.Text = frmLogin.bridge.obtenerDatos();
             txtOrigen.AllowDrop = true;
-            
         }
 
         //Método para realizar drag and drop (fallido)
